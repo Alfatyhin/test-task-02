@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Task List </title>
+
+    <style>
+        body {
+            padding-left: 40px;
+        }
+        .content {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: 20px;
+            font-size: 32px;
+        }
+        table {
+            width: 100%;
+            border: 1px solid #000;
+        }
+
+        .error_message {
+            color: brown;
+            font-weight: 600;
+        }
+        .message {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <? if ($error_message):?>
+        <? foreach ($error_message as $item) : ?>
+            <h1 class="error_message"><? echo $item; ?></h1>
+        <? endforeach; ?>
+    <? else: ?>
+
+
+
+        <div >
+            <p>enter login and password</p>
+            <form  method="post" >
+                <table class="new-task">
+                    <tr>
+                        <td>
+                            <p>Login: </p>
+                            <input type="text" name="login">
+                        </td>
+                        <td>
+                            <p>password:</p>
+                            <input type="text" name="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+
+                            <input type="submit" value="ENTER">
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+
+    <? endif; ?>
+</div>
+</body>
+</html>
+
