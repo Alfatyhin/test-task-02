@@ -44,6 +44,12 @@
         }
         .message {
             color: green;
+            text-align: center;
+            background: #dac7c7;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            font-variant: small-caps;
         }
         .redact {
             float: right;
@@ -75,7 +81,7 @@
         <? endif; ?>
 </p>
 <? if ($message):?>
-    <p class="message">задача записана</p>
+    <p class="message"><? echo $message; ?></p>
 <? endif; ?>
 <table>
     <tr>
@@ -138,7 +144,7 @@ if ($taskList) {
 
         echo "<tr>
                     <td>
-                    <form method='post'>
+                    <form method='post' action='redact'>
                         <input type='hidden' name='id' value='$taskId' />
                         <input type='hidden' name='user_name' value='$userName' />
                         <input type='hidden' name='email' value='$email' />
@@ -168,7 +174,7 @@ if ($taskList) {
 
 <? if ($taskList && $paginate['totalCount'] > $count): ?>
 
-    <form action="" method="post">
+    <form method="post">
 
         <input type="hidden" name="thisPage" value="<? echo $thisPage; ?>" checked >
 
@@ -210,7 +216,7 @@ if ($taskList) {
 
     <div class="new_order">
     <p>Add task</p>
-    <form  method="post" >
+    <form  method="post" action="<? echo APP_WEB_PAGE; ?>/save">
         <table class="new-task">
         <tr>
             <td>

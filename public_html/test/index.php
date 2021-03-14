@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(empty($_SESSION['admin'])) {
+    $_SESSION['admin'] = false;
+}
+
 $rootAppDir = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . '..';
 
 $array = explode('/', $_SERVER['SCRIPT_NAME']);
@@ -22,6 +26,16 @@ switch ($parts['path']) {
     case $webUrl . '/':
         $controller = new App\Controller\Tasks();
         $controller->indexAction();
+        break;
+
+    case $webUrl . '/save':
+        $controller = new App\Controller\Tasks();
+        $controller->saveAction();
+        break;
+
+    case $webUrl . '/redact':
+        $controller = new App\Controller\Tasks();
+        $controller->redactAction();
         break;
 
     case $webUrl . '/login':
