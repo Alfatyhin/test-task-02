@@ -83,13 +83,13 @@
 <? if ($message):?>
     <p class="message"><? echo $message; ?></p>
 <? endif; ?>
-<table>
+<table> <caption>Task List</caption>
     <tr>
         <th>
-            id
+            user
         </th>
         <th>
-            user
+            email
         </th>
         <th>
             description
@@ -142,18 +142,18 @@ if ($taskList) {
             }
         }
 
+        $webUrl = APP_WEB_PAGE;
         echo "<tr>
-                    <td>
-                    <form method='post' action='redact'>
-                        <input type='hidden' name='id' value='$taskId' />
-                        <input type='hidden' name='user_name' value='$userName' />
-                        <input type='hidden' name='email' value='$email' />
-                        
-                        $taskId
-                    </td>
                     <td class='user'>
-                        name: $userName <hr>
-                        email: $email
+                        <form method='post' action='$webUrl/redact'>
+                            <input type='hidden' name='id' value='$taskId' />
+                            <input type='hidden' name='user_name' value='$userName' />
+                            <input type='hidden' name='email' value='$email' />
+                        
+                        $userName
+                    </td>
+                    <td class='email'>
+                        $email
                     </td>
                     <td>
                         $description
@@ -174,7 +174,7 @@ if ($taskList) {
 
 <? if ($taskList && $paginate['totalCount'] > $count): ?>
 
-    <form method="post">
+    <form action="<? echo APP_WEB_PAGE; ?>/" method="post" >
 
         <input type="hidden" name="thisPage" value="<? echo $thisPage; ?>" checked >
 

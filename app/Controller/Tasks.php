@@ -12,6 +12,7 @@ class Tasks
     private static function clean($value)
     {
         $value = trim($value);
+        $value = preg_replace('/(<script>.*<\/script>)/s', '', $value);
         $value = stripslashes($value);
         $value = strip_tags($value);
         $value = htmlspecialchars($value);
@@ -64,6 +65,7 @@ class Tasks
 
     public function saveAction()
     {
+
         $user_name = $this::clean($_POST['user_name']);
         $email = $this::clean($_POST['email']);
         $description = $this::clean($_POST['description']);
@@ -83,16 +85,17 @@ class Tasks
 
                 $_SESSION['message'] = 'задача добавлена';
 
-                header("Location: " . APP_WEB_PAGE . '/..');
+                header("Location: " . APP_WEB_PAGE . '/save/..');
 
             } else {
                 $error_message[] = 'no valid email';
             }
 
-
         } else {
             $error_message[] = 'заполните все поля';
         }
+
+        include_once PROGECT_VIEW_DIR . DIRECTORY_SEPARATOR . 'tasklist.phtml';
     }
 
     public function redactAction()
@@ -119,9 +122,9 @@ class Tasks
 
             $task->save();
 
-            header("Location: " . APP_WEB_PAGE . '/..');
+            header("Location: " . APP_WEB_PAGE . '/redact/..');
         } else {
-            header("Location: " . APP_WEB_PAGE . '/../login');
+            header("Location: " . APP_WEB_PAGE . '/login');
         }
     }
 
@@ -135,7 +138,7 @@ class Tasks
 
             if ($login == APP_ADMIN_LOGIN && $passwod == APP_ADMIN_PASS) {
                 $_SESSION['admin'] = true;
-                header("Location: " . APP_WEB_PAGE . '/..');
+                header("Location: " . APP_WEB_PAGE . '/login/..');
             } else {
                 $error_message[] = 'ошибка авторизации';
             }
@@ -150,6 +153,6 @@ class Tasks
     public function outAction()
     {
         $_SESSION['admin'] = false;
-        header("Location: " . APP_WEB_PAGE);
+        header("Location: " . APP_WEB_PAGE . '/out/..');
     }
 }
